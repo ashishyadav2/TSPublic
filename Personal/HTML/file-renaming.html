@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Automated File naming</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <style>
+        input {
+            padding: 8px 15px;
+            margin: 5px 0;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        button {
+            padding: 8px 15px;
+            margin: 5px 0;
+            background: #296ff3;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <input id="item1" value="MP-10-Jan-2022" ></input><button>Copy</button><br>
+    <input id="item2" value="AOA-10-Jan-2022" ></input><button>Copy</button><br>
+    <input id="item3" value="DBMS-10-Jan-2022" ></input><button>Copy</button><br>
+    <input id="item4" value="EM4-10-Jan-2022" ></input><button>Copy</button><br>
+    <input id="item5" value="Python-10-Jan-2022" ></input><button>Copy</button><br>
+    <input id="item6" value="OS-10-Jan-2022" ></input><button>Copy</button>
+</body>
+<script>
+    //MP-10-Jan-2022
+    var date = new Date();
+    let day,mon,year,hour,min;
+    let month = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"];
+    day = date.getDate();
+    mon = month[date.getMonth()];
+    year = date.getFullYear();
+    let subject = ['MP','AOA','DBMS','EM4','Python','OS'];
+    var file_name = `${day}-${mon}-${year}`;
+    let inputs = document.querySelectorAll("input");
+    let btn = document.querySelectorAll("button");
+    for(let i =0;i<inputs.length;i++) {
+        inputs[i].value = `${subject[i]}-${file_name}`;
+        btn[i].addEventListener('click', ()=> {
+        inputs[i].setSelectionRange(0, 99999);
+        inputs[i].select();
+        navigator.clipboard.writeText(inputs[i].value);
+        });
+    }
+    let n =10,sum=0;
+    for(let i=0;i<=n;i++) {
+        sum = sum + i;
+    }
+</script>
+</html>
