@@ -1,0 +1,6 @@
+basic python lessons 
+modules
+pip
+comments
+os 
+playsound
