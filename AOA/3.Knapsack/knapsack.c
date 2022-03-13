@@ -52,7 +52,7 @@ void main() {
     // actual knapsack algorithm
     int currentWeight =0;
     int currentSpace;
-    for(i=0;i<n;i++) {
+    for(i=0;i<n-1;i++) {
         if((currentWeight+items[i].weight)<= capacity) {
             currentWeight+=items[i].weight;
             maxprofit+=items[i].profit;

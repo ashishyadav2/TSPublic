@@ -1,71 +1,54 @@
 #include<stdio.h>
-#include<conio.h>
-int split(int [],int,int,int);
-void minmax(int[],int,int,int);
-void main() { 
-int a[100],i,j,n,c;
-printf("\nHow many elements");
-scanf("%d",&n);
-printf("\nEnter the elements");
-for(i=0;i<n;i++)
-{
-scanf("%d",&a[i]);
- }
-  if(n==1)
-  printf("\n max=min=%d",a[0]);
-  else
-  c=split(a,0,n-1,0);
 
-    printf("\n Max is =%d",a[0]);
-    printf("\n min is =%d",a[n-1]);
-   printf("\n count=%d",c);
+void MaxMin(int,int); //function prototype
+
+int array[100];
+int max,min;
+
+void main() {
+int num,i;
+printf("Enter the size of array: ");
+scanf("%d",&num);
+for(i=1;i<=num;i++) {
+  printf("Enter element at location %d: ",i);
+  scanf("%d",&array[i]);
+}
+max = array[0];
+min = array[0];
+MaxMin(1,num);
+printf("\nLargest element in array: %d\n",max);
+printf("Smallest element in array: %d\n",min);
+}
+
+void MaxMin(int start,int end) { //start and ends are indices of array
+  int max1,min1,mid;
+
+  if(start==end) {
+    max1 = min1 = start;
+  }
+  else {
+    if(start==end-1) {
+      if(array[start]>array[end]) {
+        max = array[start];
+        min = array[end];
+      }
+      else {
+        max = array[end];
+        min = array[start];
+      }
     }
-
-
- int  split(int a[],int left,int right,int c)
- { int mid;
- if(left<right)
- {
- mid=(left+right)/2;
-c= split(a,left,mid,c);
-c= split(a,mid+1,right,c);
-c++;
- minmax(a,left,mid,right);
-return c;
- }
- return c;
- }
-
- void minmax(int a[],int i,int m,int j)
-{int c[50];
-int p,q,r;
-p=i;
-q=m+1;
-r=i;
-while(p<=m && q<=j)
-{
-if(a[p]<=a[q])
-{ c[r]=a[p];
-p++;
-}
-else
-{
-c[r]=a[q];
-q++;
-}
-r++;
-}
-while(p<=m)
-{ c[r]=a[p];
-p++;
-r++;
-}
-while(q<=j)
-{
-c[r]=a[q];
-q++;
-r++;
-}
-for(r=i;r<=j;r++)
-a[r]=c[r];
+    else {
+      mid=(start+end)/2;
+      MaxMin(start,mid);
+      max1 = max;
+      min1 = min;
+      MaxMin(mid+1,end);
+      if(max<max1) {
+        max = max1;
+      }
+      if(min>min1) {
+        min = min1;
+      }
+    }
+  }
 }

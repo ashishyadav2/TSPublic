@@ -1,51 +1,68 @@
 #include<stdio.h>
 #include<conio.h>
+
 void main() {
-    int arr[10] = {5,6,2,1,8,4,3,9,7,10};
-    int n = 10,j,i,k,item,max_comp,max_move,comp_percent=0,move_percent=0,avg_percent=0;
-    int comparisons=0,moves=0;
-    max_comp=n*(n-1)/2;
-    max_move=n-1;
+    int array[100];
+    int i,n,item,j,moves=0,comparisons=0,max_comp,max_moves,avg_percent,comp_percent,move_percent;
 
-    printf("Unsorted Array: \n");
-    for(k=0;k<n;k++) {
-        printf("%d\n",arr[k]);
+    max_comp = n*(n-1);
+    max_moves = n-1;
+    //get array size from user
+    printf("Enter size of array: "); 
+    scanf("%d",&n);
+
+    // store elements in array using for loop
+    for(i=0;i<n;i++) {
+    printf("Element at location(%d): ",i+1);
+    scanf("%d",&array[i]);
     }
 
-    for(j=1;j<n;j++) {
-        item=arr[j];
+    // insertion sort algorithm
+    for (j=1;j<n;j++) {
+        item = array[j];
         i=j-1;
-        comparisons++;
-        while((i>=0) && (item<arr[i])) {
-            moves++;
-            arr[i+1] = arr[i];
+        while ((i>=0) && (item<array[i])) {
+            array[i+1] = array[i];
             i--;
+            comparisons++;
         }
-        arr[i+1] = item;
+        array[i+1]=item;
+        moves++;
     }
-    printf("Sorted Array: \n");
-    for(k=0;k<n;k++) {
-        printf("%d\n",arr[k]);
+
+    //displaying sorted array
+    printf("\n--------Sorted Array-------\n");
+    for(i=0;i<n;i++) {
+        printf("%d\n",array[i]);
     }
-    printf("comparisons: %d\nMoves: %d\n",comparisons,moves); 
 
-    comp_percent = comparisons*100/max_comp;
-    move_percent = moves*100/max_move;
+    //analysis part
+    printf("\n--------Analysis-------\n");
+    printf("Comparisons: %d\n",comparisons);
+    printf("Moves: %d\n",moves);
 
-    printf("comparisons Percentage: %d%c\nMoves Percentage: %d%c",comp_percent,37,move_percent,37); 
+    //Complexity 
+    comp_percent = (comparisons*100)/max_comp;
+    move_percent = (moves*100)/max_moves;
 
-    avg_percent = comp_percent+move_percent;
+    avg_percent = (comp_percent+move_percent)/2;
 
-    if(avg_percent>=0&&avg_percent<=33) {
-        printf("\nAverage Percentage: %d%c",avg_percent,37);
-        printf("\nBest Case");
-    }
-    else if(avg_percent>=34&&avg_percent<=66) {
-        printf("\nAverage Percentage: %d%c",avg_percent,37);
-        printf("\nAverage Case");
-    }
-    else {
-        printf("\nAverage Percentage: %d%c",avg_percent,37);
-        printf("\nWorst Case");
+    printf("\n--------Case-------\n");
+    switch(avg_percent) {
+        case 0 ... 33:
+        printf("Best Case");
+        break;
+
+        case 34 ... 66:
+        printf("Average Case");
+        break;
+
+        case 67 ... 100:
+        printf("Worst Case");
+        break;
+
+        default:
+        printf("Invalid input");
+        break;
     }
 }
