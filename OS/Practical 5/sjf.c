@@ -1,7 +1,7 @@
 #include <stdio.h>
 void main()
 {
-    int p[20],bt[20],tat[20],total=0,wt[0],i,j,n,temp;
+    int p[20],bt[20],tat[20],total=0,wt[20],i,j,n,temp,pos;
     float avg_wt,avg_tat;
 
     printf("Enter the number of processes: ");
@@ -46,5 +46,5 @@ void main()
     }
     avg_tat = (float) total/n;
     printf("\nAverage Waiting Time: %0.2f ms\n",avg_wt);
-    printf("Average Turnaround Time: %0.2f ms",avg_tat);    
+    printf("Average Turnaround Time: %0.2f ms\n",avg_tat);    
 }
