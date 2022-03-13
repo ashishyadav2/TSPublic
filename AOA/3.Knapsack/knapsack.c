@@ -1,232 +1,66 @@
 #include<stdio.h>
-struct knap {
-int w;
-int p;
-float ratio;
+#include<conio.h>
+
+struct knapsack {
+    char id;
+    int profit;
+    int weight;
+    float ratio;
 };
-struct knap items[10];
-float temp;
-int weight,maxProfit;
-    int i,knapW,n,j;
-int main() {
-    printf("Enter Weight of knapsack: ");
-    scanf("%d",&knapW);
-    printf("Number of items: ");
+struct knapsack items[10],temp;
+void main() {
+    int n,i,j,capacity,weight;
+    float maxprofit=0;
+    printf("Enter capacity of knapsack: ");
+    scanf("%d",&capacity);
+    printf("Enter number of Items: ");
     scanf("%d",&n);
-    for (i =0;i<n;i++) {
-        printf("Enter Profit and weight: ");
-        scanf("%d %d",&items[i].p,&items[i].w);
-        items[i].ratio =  (float) items[i].p/items[i].w;
+
+    // getting profit and weight data from user and calculting pi/wi ratio
+    for(i=0;i<n;i++) {
+    printf("Enter Profit and Weight of Item %c: ",i+65);
+    scanf("%d %d",&items[i].profit,&items[i].weight);
+    items[i].id = i+65;
+    items[i].ratio = (float) items[i].profit/items[i].weight;
+    }
+    
+    // printing data entered by uset
+    printf("\n---------Entered Data------------\n");
+    printf("Items\tProfit\tWeight\tPi/wi\n");
+    for(i=0;i<n;i++) {
+    printf("%c\t%d\t%d\t%0.3f\n",items[i].id,items[i].profit,items[i].weight,items[i].ratio);
     }
 
-    printf("\nEntered Data\n");
-    printf("Item\tProfit\tWeight\tPi/Wi\n");
-    int id = 1;
-for(i=0;i<n;i++) {
-    printf("%d\t %d\t %d\t %0.3f\t\n",id,items[i].p,items[i].w,items[i].ratio);
-    id++;#include<stdio.h>
-struct knap {
-int w;
-int p;
-float ratio;
-};
-struct knap items[10];
-float temp;
-int weight,maxProfit;
-    int i,knapW,n,j;
-int main() {
-    printf("Enter Weight of knapsack: ");
-    scanf("%d",&knapW);
-    printf("Number of items: ");
-    scanf("%d",&n);
-    for (i =0;i<n;i++) {
-        printf("Enter Profit and weight: ");
-        scanf("%d %d",&items[i].p,&items[i].w);
-        items[i].ratio =  (float) items[i].p/items[i].w;
-    }
-
-    printf("\nEntered Data\n");
-    printf("Item\tProfit\tWeight\tPi/Wi\n");
-    int id = 1;
-for(i=0;i<n;i++) {
-    printf("%d\t %d\t %d\t %0.3f\t\n",id,items[i].p,items[i].w,items[i].ratio);
-    id++;
-}
-// sort using bubble sort
-for(i=0;i<n;i++) {
-    for(j=0;j<n-i-1;j++) {
-        if(items[j].ratio<items[j+1].ratio) {
-            temp = items[j].ratio;
-            items[j].ratio = items[j+1].ratio;
-            items[j+1].ratio = temp;
+    // sorting the table according to the pi/wi ratio in descending order using bubble sort
+    for(i=0;i<n;i++) {
+        for(j=0;j<n-i-1;j++) {
+            if(items[j].ratio<items[j+1].ratio) {
+                temp = items[j];
+                items[j] = items[j+1];
+                items[j+1] = temp;
+            }
         }
     }
-}
-    printf("\nSorted Data\n");
-for(i=0;i<n;i++) {
-    printf("%d\t %d\t %d\t %0.3f\t\n",id,items[i].p,items[i].w,items[i].ratio);
-    id++;
-}
-#include<stdio.h>
-struct knap {
-int w;
-int p;
-float ratio;
-};
-struct knap items[10];
-float temp;
-int weight,maxProfit;
-    int i,knapW,n,j;
-int main() {
-    printf("Enter Weight of knapsack: ");
-    scanf("%d",&knapW);
-    printf("Number of items: ");
-    scanf("%d",&n);
-    for (i =0;i<n;i++) {
-        printf("Enter Profit and weight: ");
-        scanf("%d %d",&items[i].p,&items[i].w);
-        items[i].ratio =  (float) items[i].p/items[i].w;
-    }
 
-    printf("\nEntered Data\n");
-    printf("Item\tProfit\tWeight\tPi/Wi\n");
-    int id = 1;
-for(i=0;i<n;i++) {
-    printf("%d\t %d\t %d\t %0.3f\t\n",id,items[i].p,items[i].w,items[i].ratio);
-    id++;
-}
-// sort using bubble sort
-for(i=0;i<n;i++) {
-    for(j=0;j<n-i-1;j++) {
-        if(items[j].ratio<items[j+1].ratio) {
-            temp = items[j].ratio;
-            items[j].ratio = items[j+1].ratio;
-            items[j+1].ratio = temp;
-        }
-    }
-}
-    printf("\nSorted Data\n");
-for(i=0;i<n;i++) {
-    printf("%d\t %d\t %d\t %0.3f\t\n",id,items[i].p,items[i].w,items[i].ratio);
-    id++;
-}
+    // printing the data after sorting
+    printf("\n---------Sorted Data------------\n");
+    printf("Items\tProfit\tWeight\tPi/wi\n");
+    for(i=0;i<n;i++) {
+    printf("%c\t%d\t%d\t%0.3f\n",items[i].id,items[i].profit,items[i].weight,items[i].ratio);
+    }   
 
-// knapsack#include<stdio.h>
-struct knap {
-int w;
-int p;
-float ratio;
-};
-struct knap items[10];
-float temp;
-int weight,maxProfit;
-    int i,knapW,n,j;
-int main() {
-    printf("Enter Weight of knapsack: ");
-    scanf("%d",&knapW);
-    printf("Number of items: ");
-    scanf("%d",&n);
-    for (i =0;i<n;i++) {
-        printf("Enter Profit and weight: ");
-        scanf("%d %d",&items[i].p,&items[i].w);
-        items[i].ratio =  (float) items[i].p/items[i].w;
-    }
-
-    printf("\nEntered Data\n");
-    printf("Item\tProfit\tWeight\tPi/Wi\n");
-    int id = 1;
-for(i=0;i<n;i++) {
-    printf("%d\t %d\t %d\t %0.3f\t\n",id,items[i].p,items[i].w,items[i].ratio);
-    id++;
-}
-// sort using bubble sort
-for(i=0;i<n;i++) {
-    for(j=0;j<n-i-1;j++) {
-        if(items[j].ratio<items[j+1].ratio) {
-            temp = items[j].ratio;
-            items[j].ratio = items[j+1].ratio;
-            items[j+1].ratio = temp;
-        }
-    }
-}
-    printf("\nSorted Data\n");
-for(i=0;i<n;i++) {
-    printf("%d\t %d\t %d\t %0.3f\t\n",id,items[i].p,items[i].w,items[i].ratio);
-    id++;
-}
-
-// knapsack algorithm
-for(i=0;i<n;i++) {
-    weight = 0;
-    while(weight<knapW) {
-        if(weight + items[i].w <=knapW) {
-            weight = weight + items[i].w;
+    // actual knapsack algorithm
+    int currentWeight =0;
+    int currentSpace;
+    for(i=0;i<n;i++) {
+        if((currentWeight+items[i].weight)<= capacity) {
+            currentWeight+=items[i].weight;
+            maxprofit+=items[i].profit;
         }
         else {
-            items[i].w = (knapW-weight) / items[i].w;
-            weight = knapW;
+            currentSpace = capacity- currentWeight;
+            maxprofit += (float) (items[i].profit*currentSpace)/items[i].weight;
         }
     }
-maxProfit += items[i].p;
-}
-printf("Max profit: %d",maxProfit);
-}
- = 0;
-    while(weight<knapW) {
-        if(weight + items[i].w <=knapW) {
-            weight = weight + items[i].w;
-        }
-        else {
-            items[i].w = (knapW-weight) / items[i].w;
-            weight = knapW;
-        }
-    }
-maxProfit += items[i].p;
-}
-printf("Max profit: %d",maxProfit);
-}
-t = 0;
-    while(weight<knapW) {
-        if(weight + items[i].w <=knapW) {
-            weight = weight + items[i].w;
-        }
-        else {
-            items[i].w = (knapW-weight) / items[i].w;
-            weight = knapW;
-        }
-    }
-maxProfit += items[i].p;
-}
-printf("Max profit: %d",maxProfit);
-}
-
-    for(j=0;j<n-i-1;j++) {
-        if(items[j].ratio<items[j+1].ratio) {
-            temp = items[j].ratio;
-            items[j].ratio = items[j+1].ratio;
-            items[j+1].ratio = temp;
-        }
-    }
-}
-    printf("\nSorted Data\n");
-for(i=0;i<n;i++) {
-    printf("%d\t %d\t %d\t %0.3f\t\n",id,items[i].p,items[i].w,items[i].ratio);
-    id++;
-}
-
-// knapsack algorithm
-for(i=0;i<n;i++) {
-    weight = 0;
-    while(weight<knapW) {
-        if(weight + items[i].w <=knapW) {
-            weight = weight + items[i].w;
-        }
-        else {
-            items[i].w = (knapW-weight) / items[i].w;
-            weight = knapW;
-        }
-    }
-maxProfit += items[i].p;
-}
-printf("Max profit: %d",maxProfit);
+    printf("\nMax Profit: %0.3f\n",maxprofit);
 }
