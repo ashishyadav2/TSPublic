@@ -1,0 +1,51 @@
+Functions
+
+from array import *
+def square(num):
+	for i in num:
+		print(num[i-1]*num[i-1])
+arr = array('i',[1,2,3,4,5,6,7,8,9])
+square(arr)
+
+Classes
+
+class Person:
+	def __init__(self,name,age):
+		self.name = name
+		self.age = age
+		
+p1 = Person("John",35)
+
+print(p1.name)
+print(p1.age)
+
+Inheritance
+
+class Parent:
+	def __init__(self,fname,lname):
+		self.firstname = fname
+		self.lastname = lname
+	
+	def printname(self):
+		print(self.firstname,self.lastname)
+		
+class Child(Parent):
+	def __init__(self,fname,lname):
+		Parent.__init__(self,fname,lname)
+	
+x = Child("John","Cena")
+x.printname()			
+
+Exception
+
+from array import *
+def square(num):
+	for i in num:
+		print(num[i]*num[i])
+			
+arr = array('i',[1,2,3,4,5,6,7,8,9])
+try:
+	square(arr)
+
+except:
+	print("index error occurred")
