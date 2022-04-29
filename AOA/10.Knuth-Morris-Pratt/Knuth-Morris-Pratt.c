@@ -1,53 +1,42 @@
-#include<iostream>
-#include<string.h>
-using namespace std;
-void prefixSuffixArray(char* pat, int M, int* pps) {
-   int length = 0;
-   pps[0] = 0;
-   int i = 1;
-   while (i < M) {
-      if (pat[i] == pat[length]) {
-         length++;
-         pps[i] = length;
-         i++;
-      } else {
-         if (length != 0)
-         length = pps[length - 1];
-         else {
-            pps[i] = 0;
-            i++;
-         }
-      }
-   }
+#include <stdio.h>
+#include <string.h>
+int i,path[20],k;
+void prefix(char p[])
+{
+int k=-1;
+path[0]=k;
+for(i=1;i<strlen(p);i++)
+{
+while(k>-1 && p[k+1] != p[i])
+k=path[k];
+if(p[k+1]==p[i])
+k++;
+path[i]=k;
 }
-void KMPAlgorithm(char* text, char* pattern) {
-   int M = strlen(pattern);
-   int N = strlen(text);
-   int pps[M];
-   prefixSuffixArray(pattern, M, pps);
-   int i = 0;
-   int j = 0;
-   while (i < N) {
-      if (pattern[j] == text[i]) {
-         j++;
-         i++;
-      }
-      if (j == M) {
-         printf("Found pattern at index %d\n", i - j);
-         j = pps[j - 1];
-      }
-      else if (i < N && pattern[j] != text[i]) {
-         if (j != 0)
-         j = pps[j - 1];
-         else
-         i = i + 1;
-      }
-   }
 }
-int main() {
-   char text[] = "xyztrwqxyzfg";
-   char pattern[] = "xyz";
-   printf("The pattern is found in the text at the following index : \n");
-   KMPAlgorithm(text, pattern);
-   return 0;
+void kmp(char t[],char p[])
+{
+int q=-1;
+prefix(p);
+for(i=0;i<strlen(t);i++)
+{
+while(q>-1 && p[q+1] != t[i])
+q=path[q];
+if(p[q+1]==t[i])
+q++;
+if(q==strlen(p)-1)
+{ k=i-strlen(p)+1;
+printf("\nPattern found with shift : %d",k);
+break;
+}
+}
+}
+void main()
+{
+char t[20],p[20];
+printf("Enter the text string : ");
+gets(t);
+printf("Enter the pattern string : ");
+gets(p);
+kmp(t,p);
 }
