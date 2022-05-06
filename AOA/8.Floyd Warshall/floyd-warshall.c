@@ -1,50 +1,67 @@
-// Floyd-Warshall Algorithm in C
-
 #include <stdio.h>
+#include <conio.h>
+void main()
+{
+    int wt[10][10], n, i, j;
+    void shortest_path(int matrix[10][10], int n);
+    clrscr();
+    printf("How many vertices?");
+    scanf("%d", &n);
+    printf("\nEnter the elements:(enter 999 as infinity value");
 
-// defining the number of vertices
-#define nV 4
-
-#define INF 999
-
-void printMatrix(int matrix[][nV]);
-
-// Implementing floyd warshall algorithm
-void floydWarshall(int graph[][nV]) {
-  int matrix[nV][nV], i, j, k;
-
-  for (i = 0; i < nV; i++)
-    for (j = 0; j < nV; j++)
-      matrix[i][j] = graph[i][j];
-
-  // Adding vertices individually
-  for (k = 0; k < nV; k++) {
-    for (i = 0; i < nV; i++) {
-      for (j = 0; j < nV; j++) {
-        if (matrix[i][k] + matrix[k][j] < matrix[i][j])
-          matrix[i][j] = matrix[i][k] + matrix[k][j];
-      }
+    for (i = 1; i <= n; i++)
+    {
+        for (j = 1; j <= n; j++)
+        {
+            printf("\nwt[%d][%d]", i, j);
+            scanf("%d", &wt[i][j]);
+        }
     }
-  }
-  printMatrix(matrix);
+    printf("\nComputing APSP.....\n");
+    shortest_path(wt, n);
+    getch();
 }
-
-void printMatrix(int matrix[][nV]) {
-  for (int i = 0; i < nV; i++) {
-    for (int j = 0; j < nV; j++) {
-      if (matrix[i][j] == INF)
-        printf("%4s", "INF");
-      else
-        printf("%4d", matrix[i][j]);
+void shortest_path(int wt[10][10], int n)
+{
+    int D[5][10][10], i, j, k;
+    int min(int, int);
+    for (i = 1; i <= n; i++)
+    {
+        for (j = 1; j <= n; j++)
+        {
+            D[0][i][j] = wt[i][j]; // computing D(0)
+        }
     }
-    printf("\n");
-  }
+    for (k = 1; k <= n; k++)
+    {
+        for (i = 1; i <= n; i++)
+        {
+            for (j = 1; j <= n; j++)
+            {
+                D[k][i][j] = min(D[k - 1][i][j], (D[k - 1][i][k] + D[k - 1][k][j]));
+            }
+        }
+    }
+    // printing D(k)
+    for (k = 0; k <= n; k++)
+    {
+        printf("D(%d)=\n", k);
+        for (i = 1; i <= n; i++)
+        {
+            for (j = 1; j <= n; j++)
+            {
+                printf("%d\t", D[k][i][j]);
+            }
+            printf("\n");
+        }
+    }
 }
-
-int main() {
-  int graph[nV][nV] = {{0, 3, INF, 5},
-             {2, 0, INF, 4},
-             {INF, 1, 0, INF},
-             {INF, INF, 2, 0}};
-  floydWarshall(graph);
+int min(int a, int b)
+{
+    {
+        if (a < b)
+            return a;
+        else
+            return b;
+    }
 }
