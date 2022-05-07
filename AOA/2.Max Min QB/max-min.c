@@ -24,7 +24,7 @@ void MaxMin(int start,int end) { //start and ends are indices of array
   int max1,min1,mid;
 
   if(start==end) {
-    max1 = min1 = start;
+    max = min = start;
   }
   else {
     if(start==end-1) {

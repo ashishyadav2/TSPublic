@@ -1,68 +1,65 @@
-#include <stdio.h>
-#include <conio.h>
-#define MAX 50
-
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+int i,j,k,a,b,u,v,n,ne=1;
+int min,mincost=0,cost[9][9],parent[9];
+int find(int);
+int uni(int,int);
 void main()
 {
-	int a[MAX][MAX];
-	int parent[MAX];
-	int min;
-	int u = 0;
-	int v = 0;
-	int total = 0;
-	int tedge = 1;
-	int n, i, j, count;
-
-	printf("Enter the total number of vertex: ");
-	scanf("%d", &n);
-	for (i = 0; i < n; i++)
+	clrscr();
+	printf("\n\tImplementation of Kruskal's algorithm\n");
+	printf("\nEnter the no. of vertices:");
+	scanf("%d",&n);
+	printf("\nEnter the cost adjacency matrix:\n");
+	for(i=1;i<=n;i++)
 	{
-		parent[i] = 0;
-		for (j = 0; j < n; j++)
+		for(j=1;j<=n;j++)
 		{
-			printf("\n Enter value for Matrix[%d][%d] :", i, j);
-			scanf("%d", &a[i][j]);
-			if (a[i][j] == 0)
-			{
-				a[i][j] = 999;
-			}
+			scanf("%d",&cost[i][j]);
+			if(cost[i][j]==0)
+				cost[i][j]=999;
 		}
 	}
-
-	while (tedge < n)
+	printf("The edges of Minimum Cost Spanning Tree are\n");
+	while(ne < n)
 	{
-		min = 999;
-		for (i = 0; i < n; i++)
+		for(i=1,min=999;i<=n;i++)
 		{
-			for (j = 0; j < n; j++)
+			for(j=1;j <= n;j++)
 			{
-				if (min > a[i][j])
+				if(cost[i][j] < min)
 				{
-					min = a[i][j];
-					u = i;
-					v = j;
+					min=cost[i][j];
+					a=u=i;
+					b=v=j;
 				}
 			}
 		}
-
-		while (parent[u] != 0)
+		u=find(u);
+		v=find(v);
+		if(uni(u,v))
 		{
-			u = parent[u];
+			printf("%d edge (%d,%d) =%d\n",ne++,a,b,min);
+			mincost +=min;
 		}
-		while (parent[v] != 0)
-		{
-			v = parent[v];
-		}
-		if (v != u)
-		{
-			tedge++;
-			printf("\n Min tedge found at : %d -> %d with weight %d ", u, v, min);
-			;
-			total = total + min;
-			parent[v] = u;
-		}
-
-		a[u][v] = a[v][u] = 999;
+		cost[a][b]=cost[b][a]=999;
 	}
-	printf("\nWeight of the minimum spanning tree is: %d", total);
+	printf("\n\tMinimum cost = %d\n",mincost);
+	getch();
+}
+int find(int i)
+{
+	while(parent[i])
+	i=parent[i];
+	return i;
+}
+int uni(int i,int j)
+{
+	if(i!=j)
+	{
+		parent[j]=i;
+		return 1;
+	}
+	return 0;
 }
